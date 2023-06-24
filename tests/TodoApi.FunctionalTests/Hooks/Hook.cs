@@ -20,8 +20,8 @@ public class Hooks
     {
         var services = new ServiceCollection();
 
-        var mockTodoRespository = Substitute.For<ITodoRepository>();
-        services.AddSingleton<ITodoRepository>(mockTodoRespository);
+        // var mockTodoRespository = Substitute.For<ITodoRepository>();
+        // services.AddSingleton<ITodoRepository>(mockTodoRespository);
 
         _serviceProvider = services.BuildServiceProvider();
     }
