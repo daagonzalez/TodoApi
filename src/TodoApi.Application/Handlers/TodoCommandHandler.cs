@@ -1,6 +1,6 @@
 using TodoApi.Application.Interfaces;
+using TodoApi.Domain.Interfaces.Infrastructure;
 using TodoApi.Domain.Models;
-using TodoApi.Infrastructure.Interfaces;
 
 namespace TodoApi.Application.Handlers;
 

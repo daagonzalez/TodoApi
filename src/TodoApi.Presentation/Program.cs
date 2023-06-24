@@ -1,6 +1,6 @@
 using TodoApi.Application.Handlers;
 using TodoApi.Application.Interfaces;
-using TodoApi.Infrastructure.Interfaces;
+using TodoApi.Domain.Interfaces.Infrastructure;
 using TodoApi.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,9 +17,9 @@ builder.Services.AddSwaggerGen(c =>
         new Microsoft.OpenApi.Models.OpenApiInfo { Title = "ToDo API", Version = "v1" });
 });
 
+
 builder.Services.AddSingleton<ITodoCommandHandler, TodoCommandHandler>();
 builder.Services.AddSingleton<ITodoQueryHandler, TodoQueryHandler>();
-
 builder.Services.AddSingleton<IEventRepository, EventRepository>();
 builder.Services.AddSingleton<ITodoRepository, TodoRepository>();
 

@@ -1,6 +1,6 @@
 using TodoApi.Domain.Models;
 
-namespace TodoApi.Infrastructure.Interfaces;
+namespace TodoApi.Domain.Interfaces.Infrastructure;
 
 public interface ITodoRepository
 {

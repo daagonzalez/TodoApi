@@ -1,5 +1,5 @@
-﻿using TodoApi.Domain.Models;
-using TodoApi.Infrastructure.Interfaces;
+﻿using TodoApi.Domain.Interfaces.Infrastructure;
+using TodoApi.Domain.Models;
 
 namespace TodoApi.Infrastructure.Repositories;
 public class TodoRepository : ITodoRepository

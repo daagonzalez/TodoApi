@@ -12,7 +12,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TodoApi.Application\TodoApi.Application.csproj" />
-    <ProjectReference Include="..\TodoApi.Infrastructure\TodoApi.Infrastructure.csproj" />
   </ItemGroup>
-
 </Project>

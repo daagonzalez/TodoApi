@@ -1,5 +1,5 @@
 using TodoApi.Domain.Interfaces;
-using TodoApi.Infrastructure.Interfaces;
+using TodoApi.Domain.Interfaces.Infrastructure;
 
 namespace TodoApi.Infrastructure.Repositories;
 
