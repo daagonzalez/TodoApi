@@ -20,6 +20,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddSingleton<ITodoCommandHandler, TodoCommandHandler>();
 builder.Services.AddSingleton<ITodoQueryHandler, TodoQueryHandler>();
+
 builder.Services.AddSingleton<IEventRepository, EventRepository>();
 builder.Services.AddSingleton<ITodoRepository, TodoRepository>();
 
