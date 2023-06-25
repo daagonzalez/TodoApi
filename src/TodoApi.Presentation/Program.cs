@@ -2,6 +2,7 @@ using TodoApi.Application.Handlers;
 using TodoApi.Application.Interfaces;
 using TodoApi.Domain.Interfaces.Infrastructure;
 using TodoApi.Infrastructure.Repositories;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,6 @@ builder.Services.AddSwaggerGen(c =>
         "v1",
         new Microsoft.OpenApi.Models.OpenApiInfo { Title = "ToDo API", Version = "v1" });
 });
-
 
 builder.Services.AddSingleton<ITodoCommandHandler, TodoCommandHandler>();
 builder.Services.AddSingleton<ITodoQueryHandler, TodoQueryHandler>();
@@ -35,6 +35,12 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "ToDo API v1");
     });
 }
+
+app.UseRouting();
+
+app.UseHttpMetrics();
+
+app.UseMetricServer("/metrics");
 
 app.UseHttpsRedirection();
 
