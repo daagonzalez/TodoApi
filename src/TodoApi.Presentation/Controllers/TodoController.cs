@@ -60,6 +60,11 @@ public class TodoController : ControllerBase
     {
         var createdTodo = _todoCommandHandler.Create(description);
         return CreatedAtAction(nameof(GetById), 
-        new { id = createdTodo.Id }, createdTodo);
+        new { id = createdTodo.Id }, new TodoResponse
+        {
+            TodoId = createdTodo.Id, 
+            Description = createdTodo.Description, 
+            Completed = createdTodo.Completed 
+        });
     }    
 }

@@ -31,4 +31,14 @@ public class Todo : AggregateRoot
 
         return todo;
     }
+
+    public static Todo CreateForTesting(Guid id, string description, bool completed)
+    {
+        var todo = new Todo(id, description)
+        {
+            Completed = completed
+        };
+
+        return todo;
+    }
 }
