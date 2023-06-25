@@ -31,9 +31,9 @@ namespace TodoApi.FunctionalTests.Steps
         [Given(@"I have a valid Todo payload")]
         public void GivenIhaveavalidTodopayload()
         {
-            var description = RandomValue.String();
+            var payload = RandomValue.Object<TodoRequest>();
 
-            _scenarioContext.Set(description, ContextKeys.CreatePayload);
+            _scenarioContext.Set(payload, ContextKeys.CreatePayload);
         }
 
         [Given(@"there are no Todos with my Id")]
@@ -104,7 +104,7 @@ namespace TodoApi.FunctionalTests.Steps
         [When(@"I create a Todo with my payload")]
         public void WhenIcreateaTodowithmypayload()
         {
-            var payload = _scenarioContext.Get<string>(ContextKeys.CreatePayload);
+            var payload = _scenarioContext.Get<TodoRequest>(ContextKeys.CreatePayload);
             var httpResponse = _todoController.Create(payload);
 
             _scenarioContext.Set(httpResponse, ContextKeys.Response);
@@ -159,14 +159,14 @@ namespace TodoApi.FunctionalTests.Steps
         [Then(@"the response should contain the created Todo")]
         public void ThentheresponseshouldcontainthecreatedTodo()
         {
-            var payload = _scenarioContext.Get<string>(ContextKeys.CreatePayload);
+            var payload = _scenarioContext.Get<TodoRequest>(ContextKeys.CreatePayload);
             var response = _scenarioContext.Get<CreatedAtActionResult>(ContextKeys.Response);
 
             var createdId = response.RouteValues.GetValueOrDefault("id") as Guid?;
             var actualResult = response.Value as TodoResponse;
 
             actualResult.TodoId.Should().Be(createdId.Value);
-            actualResult.Description.Should().Be(payload);
+            actualResult.Description.Should().Be(payload.Description);
             actualResult.Completed.Should().BeFalse();
         }
 

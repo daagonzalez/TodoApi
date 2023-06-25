@@ -1,8 +1,8 @@
+using Prometheus;
 using TodoApi.Application.Handlers;
 using TodoApi.Application.Interfaces;
 using TodoApi.Domain.Interfaces.Infrastructure;
 using TodoApi.Infrastructure.Repositories;
-using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,7 +40,7 @@ app.UseRouting();
 
 app.UseHttpMetrics();
 
-app.UseMetricServer("/metrics");
+app.UseMetricServer();
 
 app.UseHttpsRedirection();
 

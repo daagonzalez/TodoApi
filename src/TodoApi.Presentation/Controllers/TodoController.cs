@@ -56,9 +56,9 @@ public class TodoController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create(string description)
+    public IActionResult Create([FromBody]TodoRequest request)
     {
-        var createdTodo = _todoCommandHandler.Create(description);
+        var createdTodo = _todoCommandHandler.Create(request.Description);
         return CreatedAtAction(nameof(GetById), 
         new { id = createdTodo.Id }, new TodoResponse
         {
