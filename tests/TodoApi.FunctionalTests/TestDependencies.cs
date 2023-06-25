@@ -23,7 +23,9 @@ public static class TestDependencies
 
         // Infrastructure Dependencies
         var mockTodoRespository = Substitute.For<ITodoRepository>();
+        var mockEventRepository = Substitute.For<IEventRepository>();
         services.AddSingleton(mockTodoRespository);
+        services.AddSingleton(mockEventRepository);
 
         // Controllers
         services.AddSingleton(provider => {

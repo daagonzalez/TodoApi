@@ -18,6 +18,7 @@ public class TodoQueryHandler : ITodoQueryHandler
 
     public List<Todo> FetchAll()
     {
-        return _todoRepository.Read();
+        var result = _todoRepository.Read();
+        return result;
     }
 }
