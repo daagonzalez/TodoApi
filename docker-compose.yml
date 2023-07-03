@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 7033:7033
+
+  prometheus:
+    image: prom/prometheus:v2.30.3
+    volumes:
+      - ./prometheus:/etc/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+    ports:
+      - 9090:9090
+
+  grafana:
+    image: grafana/grafana:8.1.2
+    ports:
+      - 3000:3000
+    depends_on:
+      - prometheus
