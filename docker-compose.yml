@@ -6,7 +6,11 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 7033:7033
+      - 5000:5000
+      - 5001:5001
+    environment:
+      - ASPNETCORE_HTTP_PORT=https://+:5001
+      - ASPNETCORE_URLS=http://+:5000
 
   prometheus:
     image: prom/prometheus:v2.30.3

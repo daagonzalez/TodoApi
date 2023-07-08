@@ -4,4 +4,4 @@ global:
 scrape_configs:
   - job_name: 'todoapi'
     static_configs:
-      - targets: ['api:7033']
+      - targets: ['api:5000']
