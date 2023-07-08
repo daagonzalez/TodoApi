@@ -1,4 +1,6 @@
-﻿using TodoApi.Domain.Interfaces.Infrastructure;
+﻿using System.Diagnostics;
+using TodoApi.Domain;
+using TodoApi.Domain.Interfaces.Infrastructure;
 using TodoApi.Domain.Models;
 
 namespace TodoApi.Infrastructure.Repositories;
@@ -34,6 +36,7 @@ public class TodoRepository : ITodoRepository
 
     public List<Todo> Read()
     {
+        var stopwatch = Stopwatch.StartNew();
         var docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         using var sr = new StreamReader(Path.Combine(docPath, "TodosDatabase.txt"), true);
@@ -55,6 +58,8 @@ public class TodoRepository : ITodoRepository
             }
         }
 
+        stopwatch.Stop();
+        MetricsRegistry.DatabaseReadDuration.Observe(stopwatch.Elapsed.TotalSeconds);
         return todos;
     }
 
@@ -64,5 +69,6 @@ public class TodoRepository : ITodoRepository
 
         using var outputFile = new StreamWriter(Path.Combine(docPath, "TodosDatabase.txt"), true);
         outputFile.WriteLine("{0};{1};{2}", todo.Id, todo.Description, todo.Completed);
+        MetricsRegistry.TodoEntryCreated.Inc();
     }
 }
