@@ -40,7 +40,7 @@ app.UseRouting();
 
 app.UseHttpMetrics();
 
-app.UseMetricServer();
+app.UseMetricServer(settings => settings.EnableOpenMetrics = false);
 
 app.UseHttpsRedirection();
 
