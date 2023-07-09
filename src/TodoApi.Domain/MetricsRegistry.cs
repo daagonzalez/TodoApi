@@ -14,7 +14,8 @@ public class MetricsRegistry
         "Duration of the database read operation",
         new HistogramConfiguration
         {
-            Buckets = Histogram.LinearBuckets(start: 0, width: 1, count: 10) // Adjust bucket configuration as per your needs
+            Buckets = Histogram.LinearBuckets(start: 0, width: 1, count: 10), // Adjust bucket configuration as per your needs
+            LabelNames = new[] { "operation" }
         }
     );
 }

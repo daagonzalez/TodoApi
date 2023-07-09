@@ -8,6 +8,10 @@ public class TodoRepository : ITodoRepository
 {
     public Todo Read(Guid id)
     {
+        var stopwatch = Stopwatch.StartNew();
+        var random = new Random();
+        var delay = random.Next(1000, 3001); // 1 and 3 seconds
+        Thread.Sleep(delay);
         var docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         using var sr = new StreamReader(Path.Combine(docPath, "TodosDatabase.txt"), true);
@@ -25,18 +29,24 @@ public class TodoRepository : ITodoRepository
                     {
                         todo.Complete();
                     }
-                    
+                    stopwatch.Stop();
+                    MetricsRegistry.DatabaseReadDuration.WithLabels("ReadById").Observe(stopwatch.Elapsed.TotalSeconds);
                     return todo;
                 }
             }
         }
 
+        stopwatch.Stop();
+        MetricsRegistry.DatabaseReadDuration.WithLabels("ReadById").Observe(stopwatch.Elapsed.TotalSeconds);
         throw new Exception($"Unable to find a record with Id {id}");
     }
 
     public List<Todo> Read()
     {
         var stopwatch = Stopwatch.StartNew();
+        var random = new Random();
+        var delay = random.Next(1000, 3001); // 1 and 3 seconds
+        Thread.Sleep(delay);
         var docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         using var sr = new StreamReader(Path.Combine(docPath, "TodosDatabase.txt"), true);
@@ -59,7 +69,7 @@ public class TodoRepository : ITodoRepository
         }
 
         stopwatch.Stop();
-        MetricsRegistry.DatabaseReadDuration.Observe(stopwatch.Elapsed.TotalSeconds);
+        MetricsRegistry.DatabaseReadDuration.WithLabels("ReadAll").Observe(stopwatch.Elapsed.TotalSeconds);
         return todos;
     }
 
